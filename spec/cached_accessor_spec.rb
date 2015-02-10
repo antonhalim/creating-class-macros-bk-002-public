@@ -4,6 +4,7 @@ class TestClass
   extend CachedAccessor
   cached_accessor :name
 end
+
 describe CachedAccessor do
   it "creates getter and setter method for argument passed" do
     test = TestClass.new
@@ -25,11 +26,11 @@ describe CachedAccessor do
     expect(test.old_name).to eq("A test")
   end
 
-  it "allows you to undo a change" do
+  it "allows you to rollback a change" do
     test = TestClass.new
     test.name = "A test"
     test.name = "A different test"
-    test.undo(:name)
+    test.rollback_name
     expect(test.name).to eq("A test")
     expect(test.old_name).to be_nil
   end
