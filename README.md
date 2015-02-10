@@ -46,7 +46,7 @@ going to create a module named CachedAccessor that will add our
 When building a DSL, we have to move away from a lot of the normal ways of
 doing things. The next sections will cover:
 
-* _Pragmatically getting and setting instance variables_
+* _Programmatically getting and setting instance variables_
 * _Defining methods, and naming them dynamically_
 * _Calling methods at run-time_
 
