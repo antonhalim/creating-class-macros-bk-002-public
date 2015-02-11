@@ -1,9 +1,9 @@
 ---
-tags: metaprogramming, DSL, modules
+tags: metaprogramming, class macros, modules
 languages: ruby
 resources: 
 ---
-# Building A DSL
+# Creating Class Macros
 
 Ruby comes with a quick and easy way to create accessors for an object's state.
 
