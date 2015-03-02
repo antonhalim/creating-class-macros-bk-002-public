@@ -1,23 +1,28 @@
 require 'pry'
-
 module CachedAccessor
-  def cached_accessor(*arguments)
-    arguments.each do |argument|
-      define_method "#{argument}=" do |new_value|
-        instance_variable_set("@old_#{argument}", public_send(argument))
-        instance_variable_set("@#{argument}", new_value)
+
+  def cached_accessor(*methods)
+    methods.each do |method|
+      define_method "#{method}" do
+        instance_variable_get("@#{method}")
       end
-      define_method "#{argument}" do
-        instance_variable_get("@#{argument}")
+
+      define_method "#{method}=" do |new_value|
+        getter = instance_variable_get("@#{method}")
+        instance_variable_set("@old_#{method}", getter)
+        instance_variable_set("@#{method}", new_value)
       end
-      define_method "old_#{argument}" do
-        instance_variable_get("@old_#{argument}")
+
+      define_method "old_#{method}" do
+        instance_variable_get("@old_#{method}")
       end
-      define_method "rollback_#{argument}" do
-        old = instance_variable_get("@old_#{argument}")
-        instance_variable_set("@#{argument}", old)
-        instance_variable_set("@old_#{argument}", nil)
+
+      define_method "rollback_#{method}" do
+        old = instance_variable_get("@old_#{method}")
+        instance_variable_set("@#{method}", old)
+        instance_variable_set("@old_#{method}", nil)
       end
+
     end
   end
 end
